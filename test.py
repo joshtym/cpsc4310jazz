@@ -15,8 +15,8 @@ def myFunction():
    firstPart = "Subject: Meeting\nHello,\nWe have scheduled the "
    secondPart = " meeting. It will be in "
 
-   for i in range(100):
-      f = open("a3Data/schedule/email" + str(i) + ".txt", 'w')
+   for i in range(20):
+      f = open("a3Data/testData/email" + str(i) + ".txt", 'w')
       dateSelector = random.randint(1,3)
       fullString = firstPart + random.choice(event) + secondPart + random.choice(locations)
 
