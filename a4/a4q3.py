@@ -30,21 +30,33 @@ def getDict(terms,countVector):
       count += 1
    return dictionary
 
+def getLogWeightFreq(vec):
+   for i in range(0,len(vec)):
+      if vec[i] != 0:
+         vec[i] = ((math.log(vec[i]))/(math.log(10))) + 1
+   return vec
+
 def normalizeVec(vec):
    num = 0.0
    for i in vec:
       num += i*i
    num = math.sqrt(num)
-   newVec = vec
 
    for i in range(0,len(vec)):
-      newVec[i] = vec[i] / num
+      vec[i] = vec[i] / num
 
-   return newVec
+   return vec
 
 def getCosineSim(listOne, listTwo, allTerms):
-   countOne = normalizeVec(getCountVector(allTerms, listOne))
-   countTwo = normalizeVec(getCountVector(allTerms, listTwo))
+   countOne = getCountVector(allTerms, listOne)
+   countTwo = getCountVector(allTerms, listTwo)
+
+   countOne = getLogWeightFreq(countOne)
+   countTwo = getLogWeightFreq(countTwo)
+
+   countOne = normalizeVec(countOne)
+   countTwo = normalizeVec(countTwo)
+
    cosineVal = 0.0
    for i in range(0,len(countOne)):
       cosineVal += (countOne[i] * countTwo[i])
